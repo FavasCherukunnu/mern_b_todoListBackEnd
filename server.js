@@ -16,7 +16,7 @@ async function getAllData() {
 
         // Find the first document in the collection
         const first = await user.find();
-        return first;
+        return first.length===0?"Hello world":first;
     } catch (err) {
         console.log('Error connecting to MongoDB');
         console.log(err);
