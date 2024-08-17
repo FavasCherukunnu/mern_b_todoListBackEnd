@@ -90,7 +90,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.get('/', async (req, res) => {
-    res.send(await getAllData());
+    res.send('helllooooo');
+    // res.send(await getAllData());
     // res.sendFile(__dirname+'/pages/insertData.html')
 })
 
@@ -118,6 +119,6 @@ app.put('/:id', (req, res) => {
     delete data._id;
     console.log(data);
     updatedData(req.params.id, data)
-    res.send('updated Succesfully')
+    res.send('updated Succesfullyyyy')
 })
 

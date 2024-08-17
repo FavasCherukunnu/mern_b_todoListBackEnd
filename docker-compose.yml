@@ -1,0 +1,39 @@
+# optional version
+version: '3.9'
+# services refer to the containers’ configuration
+services:
+  # mongo db container
+  mongodb_container:
+    container_name: mongodb_container
+    # image from docker hub
+    image: mongo:latest
+    # if container fails, then restart the container
+    restart: always
+    # mapping port
+    ports:
+      - 2717:27017
+    # when container stop, data will be lost. to store data, configure volumes
+    volumes:
+      - mongodb:/data/db
+
+  # node js container
+  nodejs:
+    container_name: nodejs_container
+    build: .
+    # mapping port
+    ports:
+      - 4000:3002
+    volumes:
+      - .:/usr/src/app
+    # environmetn variables
+    environment:
+      DB_PATH: mongodb://mongodb_container:27017/mydatabase
+      PORT: 3002
+    # this constainer should only start after succefully start mongodb_container
+    
+    depends_on:
+      - mongodb_container
+
+
+volumes:
+  mongodb: {}
